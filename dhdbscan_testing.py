@@ -6,7 +6,7 @@ sys.path.append("hdbscan")  # Add the submodule directory to the Python path
 
 from hdbscan.hdbscan_ import HDBSCAN
 from hdbscan.hdbscan_ import DHDBSCAN
-
+from hdbscan.hdbscan_ import T
 data = np.load('clusterable_data.npy')
 
 """
@@ -27,7 +27,7 @@ def test_determinism(data, n=2, unequal_indices_file='unequal_indices.npy'):
         shuffled_indices = np.random.permutation(len(data))
         shuffled_data = data[shuffled_indices]
 
-        clusterer = HDBSCAN(min_cluster_size=15, prediction_data=True, approx_min_span_tree=False).fit(
+        clusterer = DHDBSCAN(min_cluster_size=15, prediction_data=True, approx_min_span_tree=False).fit(
             shuffled_data)
         reversed_labels = np.zeros_like(clusterer.labels_)
         reversed_labels[shuffled_indices] = clusterer.labels_
@@ -51,7 +51,7 @@ def test_determinism_num_clusters(data, n=2):
     for _ in range(n):
         shuffled_indices = np.random.permutation(len(data))
         shuffled_data = data[shuffled_indices]
-        clusterer = HDBSCAN(min_cluster_size=15, prediction_data=True, approx_min_span_tree=False, gen_min_span_tree=True).fit(shuffled_data)
+        clusterer = DHDBSCAN(min_cluster_size=15, prediction_data=True, approx_min_span_tree=False, gen_min_span_tree=True).fit(shuffled_data)
         reversed_labels = np.zeros_like(clusterer.labels_)
         reversed_labels[shuffled_indices] = clusterer.labels_
         current_sorted_sizes = get_sorted_cluster_sizes(reversed_labels)
@@ -73,7 +73,7 @@ def test_determinism_num_clusters_without_shuffeling(data, n=2):
     initial_sorted_sizes = None
 
     for _ in range(n):
-        clusterer = HDBSCAN(min_cluster_size=15, prediction_data=True, approx_min_span_tree=False).fit(data)
+        clusterer = DHDBSCAN(min_cluster_size=15, prediction_data=True, approx_min_span_tree=False).fit(data)
         labels = np.copy(clusterer.labels_)
         current_sorted_sizes = get_sorted_cluster_sizes(labels)
         if initial_sorted_sizes is None:
@@ -89,7 +89,7 @@ def test_determinism_without_modifying_unequal_indices(data, n=2):
     for _ in range(n):
         shuffled_indices = np.random.permutation(len(data))
         shuffled_data = data[shuffled_indices]
-        clusterer = HDBSCAN(min_cluster_size=15, prediction_data=True, approx_min_span_tree=False).fit(
+        clusterer = DHDBSCAN(min_cluster_size=15, prediction_data=True, approx_min_span_tree=False).fit(
             shuffled_data)
         reversed_labels = np.zeros_like(clusterer.labels_)
         reversed_labels[shuffled_indices] = clusterer.labels_
