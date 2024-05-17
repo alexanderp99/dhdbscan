@@ -11,7 +11,7 @@ sys.path.append("../hdbscan")  # Add the submodule directory to the Python path
 from hdbscan.hdbscan.hdbscan_ import HDBSCAN
 
 
-data = np.load('./clusterable_data.npy')
+data = np.load('clusterable_data.np')
 ndarrays = []
 
 """
