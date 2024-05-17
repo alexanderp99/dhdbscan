@@ -8,7 +8,8 @@ sys.path.append("../hdbscan")  # Add the submodule directory to the Python path
 #from dhdbscan.DHDBSCAN import DHDBSCAN
 
 #from hdbscan.hdbscan_ import HDBSCAN
-from hdbscan.hdbscan import HDBSCAN
+from hdbscan.hdbscan.hdbscan_ import HDBSCAN
+
 
 data = np.load('./clusterable_data.npy')
 ndarrays = []
@@ -35,6 +36,7 @@ def test_determinism_num_clusters(data, n=2):
         reversed_labels = np.zeros_like(clusterer.labels_)
         reversed_labels[shuffled_indices] = clusterer.labels_
         current_sorted_sizes = get_sorted_cluster_sizes(reversed_labels)
+
 
         """clusterer.minimum_spanning_tree_.plot(edge_cmap='viridis',
                                               edge_alpha=0.6,
