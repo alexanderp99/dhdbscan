@@ -2,12 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 import sys
-sys.path.append("hdbscan")  # Add the submodule directory to the Python path
+sys.path.append("../hdbscan")  # Add the submodule directory to the Python path
 
 from hdbscan.hdbscan_ import HDBSCAN
 from hdbscan.hdbscan_ import DHDBSCAN
-from hdbscan.hdbscan_ import T
-data = np.load('clusterable_data.npy')
+data = np.load('../clusterable_data.npy')
 
 """
 This script was used to look if the cluster that the algorithm produces (sorted by number of points), has the same number of clusterpoints

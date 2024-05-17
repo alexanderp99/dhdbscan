@@ -3,14 +3,12 @@ import matplotlib.pyplot as plt
 import os
 import sys
 import hdbscan
-sys.path.append("../hdbscan")  # Add the submodule directory to the Python path
+#sys.path.append("../hdbscan")  # Add the submodule directory to the Python path
 
-#from dhdbscan.DHDBSCAN import DHDBSCAN
+from hdbscan.hdbscan_ import HDBSCAN
+from hd
 
-#from hdbscan.hdbscan_ import HDBSCAN
-from hdbscan.hdbscan import HDBSCAN
-
-data = np.load('./clusterable_data.npy')
+data = np.load('../clusterable_data.npy')
 ndarrays = []
 
 """
@@ -29,7 +27,6 @@ def test_determinism_num_clusters(data, n=2):
     for _ in range(n):
         shuffled_indices = np.random.permutation(len(data))
         shuffled_data = data[shuffled_indices]
-        #clusterer1 = DHDBSCAN().fit(data)
         clusterer = HDBSCAN(min_cluster_size=15, prediction_data=True, approx_min_span_tree=False,
                             gen_min_span_tree=True, algorithm="generic", metric="euclidean").fit(shuffled_data)
         reversed_labels = np.zeros_like(clusterer.labels_)
